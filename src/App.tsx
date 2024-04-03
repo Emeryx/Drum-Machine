@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { TamaguiProvider, createTamagui } from '@tamagui/core'
+import { config } from '@tamagui/config/v3'
+import { XStack } from 'tamagui';
 
-function App() {
+import NoteButton from './NoteButton';
+
+const tamaguiConfig = createTamagui(config)
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <TamaguiProvider config={tamaguiConfig} className='h-full'>
+      <div className='h-screen bg-gray-600 w-600'>
+        <XStack alignSelf='center' justifyContent='center' gap='$3' flexWrap='wrap'>
+          <NoteButton txt='Q'></NoteButton>
+          <NoteButton txt='Q'></NoteButton>
+          <NoteButton txt='Q'></NoteButton>
+          <NoteButton txt='Q'></NoteButton>
+          <NoteButton txt='Q'></NoteButton>
+          <NoteButton txt='Q'></NoteButton>
+          <NoteButton txt='Q'></NoteButton>
+          <NoteButton txt='Q'></NoteButton>
+          <NoteButton txt='Q'></NoteButton>
+        </XStack>
+      </div>
+    </TamaguiProvider>
+  )
 }
 
-export default App;
+export default App
