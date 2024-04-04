@@ -1,5 +1,9 @@
 import React from 'react';
 
+interface AudioProps {
+    txt : string
+}
+
 interface inputSourceType { [key : string] : string };
 
 const inputSource : inputSourceType [] = [
@@ -14,7 +18,7 @@ const inputSource : inputSourceType [] = [
     {'C' : 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'}
 ];
 
-const Audio = ({txt} : {txt : string}) => {
+const Audio : React.FC<AudioProps> = ({txt}) => {
 
     const matchSource : inputSourceType | undefined = inputSource.find((item) => item.hasOwnProperty(txt));
     const matchSourceStr : string = matchSource?matchSource[txt]:'0';

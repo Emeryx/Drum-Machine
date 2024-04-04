@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
 import Audio from './Audio'
 
+interface DrumPadProps {
+    txt : string
+    update : Function
+}
+
 interface soundName { [sound : string] : string };
 
-const DrumPad = ({txt} : {txt : string}) => {
+const DrumPad : React.FC<DrumPadProps> = ({ txt , update }) => {
 
     const soundNames : soundName[] = [
         { 'Q' : 'Heater 1' },
@@ -21,19 +26,21 @@ const DrumPad = ({txt} : {txt : string}) => {
         const audio = document.getElementById(txt) as HTMLAudioElement;
         const displayEl = document.getElementById('display') as HTMLHeadingElement;
         const displaySound : soundName | undefined = soundNames.find((item) => item.hasOwnProperty(txt))
-
         console.log(displayEl)
         console.log(displaySound)
-        if(audio) audio.play();
+        if( audio && displaySound ){
+            update(displaySound[txt])
+            audio.play();
+        }
     }
 
     useEffect(() => {
         window.addEventListener('keydown', (e) => {
-            if(e.key === txt.toLowerCase()){
+            if(e.key.toUpperCase() === txt){
                 playAudio();
             }
         })
-    })
+    });
 
     const drumPadId = `${txt}-btn`
 
